@@ -1,0 +1,18 @@
+package com.example.personService;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class PersonService {
+	private PersonRepo repo;
+
+    private ModelMapper mapper;
+
+    public PersonService(PersonRepo repo, ModelMapper mapper) {
+        super();
+        this.repo = repo;
+        this.mapper = mapper;
+    }
+
+    // CRUD methods
+}

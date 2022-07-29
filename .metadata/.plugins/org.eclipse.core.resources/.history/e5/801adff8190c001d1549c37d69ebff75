@@ -1,0 +1,10 @@
+package com.example.SpringStarterApp;
+
+public class Profile {
+	String foreName;
+	String surName;
+	int dateOfBirth;
+	String gender;
+	String ethnicity;
+	
+}

@@ -1,0 +1,8 @@
+package com.example.SpringStarterApp;
+
+import javax.validation.constraints.Size;
+
+public class Computer {
+@Size(min=3, max=10)
+	private String brand;
+}

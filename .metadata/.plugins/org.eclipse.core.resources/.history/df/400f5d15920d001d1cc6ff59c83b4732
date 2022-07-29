@@ -1,0 +1,13 @@
+package com.example.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.example.model.Product;
+
+@Service
+public class ProductService {
+	public List<Product> list = new ArrayList();
+}

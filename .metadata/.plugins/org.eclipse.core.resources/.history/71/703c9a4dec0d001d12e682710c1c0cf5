@@ -1,0 +1,11 @@
+package com.example.model;
+
+import javax.persistence.Entity;
+
+
+public class Account {
+public long id;
+public String accountNumber;
+public String name;
+
+}

@@ -1,0 +1,10 @@
+package com.example.exception;
+
+import javax.persistence.EntityNotFoundException;
+
+public class Productnotfoundexception extends EntityNotFoundException {
+public ProductNotFoundexception() {}
+public ProductNotFoundexception(String msg) {
+	
+}
+}

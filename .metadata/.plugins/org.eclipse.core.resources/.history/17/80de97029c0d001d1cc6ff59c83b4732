@@ -1,0 +1,8 @@
+package com.example.service;
+
+import com.example.repo.BookRepo;
+
+public class BookService {
+private BookRepo repo;
+
+}

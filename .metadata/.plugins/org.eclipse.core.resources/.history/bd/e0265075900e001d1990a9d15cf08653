@@ -1,0 +1,32 @@
+package com.example.accountService;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.example.model.Account;
+
+@Service
+public class AccountService {
+
+	public List<Account> list= new ArrayList();
+
+public Account addAccout(Account a1) {
+	this.list.add(a1);
+	return this.list.get(list.size()
+-1);
+	
+	public List<Account> readAccount(){
+		return this.list;
+	}
+	public Account updateAccount(long id, Account a2) {
+		this.list.remove(id);
+		this.list.add(a2);
+		return this.get(id, a2);
+	}
+	public void deleteAccount (long id) {
+		this.list.remove(id);
+	}
+}
+}

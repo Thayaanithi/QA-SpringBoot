@@ -1,0 +1,39 @@
+package com.example.accountService;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.example.account.Repo.AccountRepo;
+import com.example.model.Account;
+
+@Service
+public class AccountService {
+private AccountRepo repo;
+	
+	public AccountService(AccountRepo repo) {
+	super();
+	this.repo = repo;
+}
+public Account addAccout(Account a1) {
+	return this.repo.save(a1);
+}
+	public List<Account> readAccount(){
+		return this.repo.findAll();
+	}
+	
+	
+	
+	public Account updateAccount(long id, Account a2) {
+		this.list.remove(id);
+		this.list.add(a2);
+		return this.get(id, a2);
+	}
+	public boolean deleteAccount (long id) {
+		this.repo.deleteById(id);
+		boolean exists=this.repo.existsById(id);
+		return !exists;
+	}
+}
+
