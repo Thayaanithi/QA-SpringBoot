@@ -1,7 +1,8 @@
 package com.example.rest.controller;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.websocket.server.PathParam;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,40 +13,45 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.persistance.domain.Band;
+import com.example.rest.dto.BandDTO;
+import com.example.service.BandService;
+
+import lombok.AllArgsConstructor;
 
 @RestController
+@AllArgsConstructor
 public class BandController {
-public List<Band>list =new ArrayList();
-
-@PostMapping ("/createband")
-public void create(@RequestBody Band band) {
-	this.list.add(band);
+private BandService service;
+	
+@PostMapping ("/addband")
+public BandDTO addband(@RequestBody Band band) {
+	return service.addBand(band);
+	
+}
+@GetMapping ("/allband")
+public List<BandDTO> getallband(){
+	return service.getAllBand();
 }
 
 @PutMapping ("/updateband/{id}")
-public void update (@PathVariable Long id, @RequestBody Band band){
-		this.list.remove(id);
-		this.list.add(band);
-		return this.list.get(id);
+public BandDTO updateband (@PathVariable Long id, @RequestBody Band band){
+		return service.updateband(id, band);
 	}
 
 @DeleteMapping("/deleteband/{id}")
-public void delete(@pathVariable Long id) {
-		this.list.remove(id);
+public boolean deleteband(@PathVariable Long id) {
+		return service.deleteBand(id);
 	}
 
 
-@GetMapping("/readband")
-public List<Band> read(){
-	return this.list;
+@GetMapping("/listbandbyId")
+public BandDTO listbandbyId(@PathParam("id") Long id) {
+	return service.listbandbyId(id);
 }
 
 
-
-
-
-@GetMapping("/listband")
-public List<Band> listband() {
-	return this.list;
+@GetMapping("/listbandbyName")
+public BandDTO listbandbyName(@PathParam("name")String name) {
+	return service.listbandbyName(name);
 }
 }

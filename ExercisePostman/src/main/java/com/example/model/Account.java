@@ -8,19 +8,16 @@ import javax.persistence.Id;
 
 @Entity
 public class Account {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private long id;
-	
-	@Column(unique=true, nullable = false)
+
 	private String accountNumber;
-	
+
 	private String name;
 
-		public Account() {
+	public Account() {
 		super();
-		}
+	}
 
 	public Account(long id, String accountNumber, String name) {
 		super();
@@ -29,6 +26,8 @@ public class Account {
 		this.name = name;
 	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public long getId() {
 		return id;
 	}
@@ -37,6 +36,7 @@ public class Account {
 		this.id = id;
 	}
 
+	@Column(unique = true, nullable = false)
 	public String getAccountNumber() {
 		return accountNumber;
 	}
@@ -52,7 +52,5 @@ public class Account {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	
 
 }

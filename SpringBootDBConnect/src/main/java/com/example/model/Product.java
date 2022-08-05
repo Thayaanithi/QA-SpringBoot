@@ -6,9 +6,9 @@ import javax.persistence.Id;
 
 @Entity
 public class Product {
-	public int id;
-	public String name;
-	public String brand;
+	private int id;
+	private String name;
+	private String brand;
 	
 	@Id
 	@GeneratedValue
@@ -31,7 +31,9 @@ public int getId() {
 		this.brand = brand;
 	}
 	
-	private Product(int id, String name, String brand) {
+	
+	
+	public Product(int id, String name, String brand) {
 		super();
 		this.id = id;
 		this.name = name;

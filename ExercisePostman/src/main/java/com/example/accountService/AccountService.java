@@ -1,43 +1,50 @@
 package com.example.accountService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import com.example.account.Repo.AccountRepo;
+import com.example.accountDTO.AccountDTO;
+import com.example.accountRepo.AccountRepository;
 import com.example.model.Account;
 
 @Service
 public class AccountService {
-private AccountRepo repo;
-	
-	public AccountService(AccountRepo repo) {
-	super();
-	this.repo = repo;
+	private AccountRepository accountRepository;
+    private ModelMapper mapper;
+    public AccountService(AccountRepository accountRepository, ModelMapper mapper) {
+        this.accountRepository = accountRepository;
+        this.mapper = mapper;
+    }
+    private AccountDTO mapToDTO(Account account) {
+        return mapper.map(account, AccountDTO.class);
+    }
+    public AccountDTO addAccount(Account account) {
+        Account saved = accountRepository.save(account);
+        return mapToDTO(saved);
+    }
+    public List<AccountDTO> getAllAccounts() {
+        return accountRepository.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+    
+    
+    public AccountDTO updateAccount(Long id, Account account) {
+        Optional<Account> existingOptional = accountRepository.findById(id);
+        Account existing = existingOptional.get();
+        existing.setName(account.getName());
+        existing.setAccountNumber(account.getAccountNumber());
+        Account updated = accountRepository.save(existing);
+        return mapToDTO(updated);
+    }
+    public boolean removeAccount(Long id) {
+        accountRepository.deleteById(id);
+        boolean exists = accountRepository.existsById(id);
+        return !exists;
+    }
+    public List<Account> getAccountByName(String name) {
+        return accountRepository.findAccountByName(name);    
 }
-public Account addAccout(Account a1) {
-	return this.repo.save(a1);
 }
-	public List<Account> readAccount(){
-		return this.repo.findAll();
-	}
-	
-	
-	
-	public Account updateAccount(long id, Account a2) {
-		Optional<Account> myTempAccount=this.repo.findById(id);
-		Account existing=myTempAccount.get();
-		existing.setAccountNumber(a2.getAccountNumber());
-		existing.setName(a2.getName());
-		return this.repo.save(existing);
-		
-	}
-	public boolean deleteAccount (long id) {
-		this.repo.deleteById(id);
-		boolean exists=this.repo.existsById(id);
-		return !exists;
-	}
-}
-

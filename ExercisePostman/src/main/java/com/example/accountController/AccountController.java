@@ -1,6 +1,5 @@
 package com.example.accountController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.accountDTO.AccountDTO;
 import com.example.accountService.AccountService;
 import com.example.model.Account;
 
@@ -24,24 +24,26 @@ public class AccountController {
 	}
 
 	@PostMapping("/create")
-	public Account create(@RequestBody Account a1) {
-		return this.service.addAccout(a1);
+	public AccountDTO create(@RequestBody Account a1) {
+		
+		return this.service.addAccount(a1);
 	}
 
 	@GetMapping("/read")
-	public List<Account> read() {
-		return this.service.readAccount();
+	public List<AccountDTO> read() {
+		return this.service.getAllAccounts();
 	}
+				
 
 	@PutMapping("/update/{id}")
-	public Account update(@PathVariable long id, @RequestBody Account a2) {
+	public AccountDTO update(@PathVariable Long id, @RequestBody Account a2) {
 		return this.service.updateAccount(id, a2);
 
 	}
 
 	@DeleteMapping("/delete/{id}")
-	public void delete(@PathVariable long id) {
-		this.service.deleteAccount(id);
+	public void delete(@PathVariable Long id) {
+		this.service.removeAccount(id);
 	}
 
 	@GetMapping("/test")

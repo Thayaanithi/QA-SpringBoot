@@ -13,7 +13,18 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Getter
+@Setter
 public class Band {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,18 +35,6 @@ public class Band {
     @OneToMany(mappedBy = "band", fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Musician> musicians = new ArrayList<>();
-
-	public Band(Long id, String name, List<Musician> musicians) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.musicians = musicians;
-	}
-
-	public Band() {
-		super();
-		
-	}
 
 	public Long getId() {
 		return id;
@@ -61,6 +60,7 @@ public class Band {
 		this.musicians = musicians;
 	}
 
+	
     
 }
 

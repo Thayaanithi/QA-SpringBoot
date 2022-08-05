@@ -15,8 +15,7 @@ import com.example.service.ProductService;
 
 @RestController
 public class MainController {
-	public ProductService service;
-	
+	private ProductService service;
 	
 	public MainController(ProductService service) {
 		super();
